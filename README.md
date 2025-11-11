@@ -61,13 +61,16 @@ Reproduced prevalence ratios and 95% confidence intervals:
 All estimates matched to two decimal places, confirming complete computational equivalence with the published findings.
 
 ## Repository Structure
+
+```txt
 CSCI_6055_R/
 │
-├── data/ # GSS data (Stata .dta files, cited from GSS Data Explorer)
-├── code/ # Original and modified R scripts
-├── results/ # Reproduced CSV outputs
-├── figures/ # PNG exports of reproduced tables
-└── README.md # Documentation (this file)
+├── data/                 # GSS data (Stata .dta files, cited from GSS Data Explorer)
+├── code/                 # Original and modified R scripts
+├── results/              # Reproduced CSV outputs
+├── figures/              # PNG exports of reproduced tables
+└── README.md             # Documentation (this file)
+
 
 
 ## Citation and Acknowledgment
