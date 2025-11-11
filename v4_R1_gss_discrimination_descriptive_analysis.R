@@ -25,7 +25,7 @@ options(na.action="na.pass")
 #prepare survey data
 
 dstrat<-svydesign(id=~vpsu,strata=~vstrat, weights=~wtssall, 
-                  data=b, nest=T)
+                  data=b, nest=TRUE)
 
 #################################################################################
 #####                 Need to subset to Ballot 3   because
@@ -152,7 +152,7 @@ descriptive$var<-c("Age (years)",
 descriptive_final<-as.data.frame(cbind(descriptive$var, as.numeric(round(descriptive$"median or mean", 2)), as.numeric(round(descriptive$se, 2))))
 colnames(descriptive_final)<-c("var", "Median or Proportion", "SE")
 
-setwd("C:/Users/lhs36/OneDrive - Drexel University/GSS_green_discrimination/Output")
+# setwd("C:/Users/lhs36/OneDrive - Drexel University/GSS_green_discrimination/Output")
 write.csv(descriptive_final, "tableone_descriptive_updated02082024.csv")
 
 
@@ -161,50 +161,57 @@ write.csv(descriptive_final, "tableone_descriptive_updated02082024.csv")
 # Additional descriptives for Table 2 of the manuscript
 #Median IQR by categories of race and gender
 
+# Ensure grouping variables are factors for svyby()
+dstrat$variables$genderid <- as.factor(dstrat$variables$genderid)
+dstrat$variables$nhwhite2cat <- as.factor(dstrat$variables$nhwhite2cat)
+
+print(names(dstrat$variables))
+str(dstrat$variables$genderid)
+str(dstrat$variables$nhwhite2cat)
+
+cat(">>> Reached before d_iqr_gender\n")
 
 d_iqr_gender <- svyby(~disc, by = ~genderid, design = dstrat, 
                       FUN = svyquantile, quantile = c(0.25, 0.5, 0.75), na.rm = TRUE)
 
-
+cat(">>> Reached before d_iqr_race\n")
 d_iqr_race <- svyby(~disc, by = ~nhwhite2cat, design = dstrat, 
                     FUN = svyquantile, quantile = c(0.25, 0.5, 0.75), na.rm = TRUE)
 
-
+cat(">>> Reached before d_iqr_race_mean\n")
 d_iqr_race_mean <- svyby(~disc, by = ~nhwhite2cat, design = dstrat, 
                          FUN = svymean, na.rm = TRUE)
 
-
+cat(">>> Reached before d_iqr_gender_mean\n")
 d_iqr_gender_mean <- svyby(~disc, by = ~genderid, design = dstrat, 
                            FUN = svymean, na.rm = TRUE)
 
 d_mean<-svymean(~disc, design = dstrat, na.rm=T)
 
-
-d_iqr <- svyby(~disc,  design = dstrat, 
-                    FUN = svyquantile, quantile = c(0.25, 0.5, 0.75), na.rm = TRUE)
-
+cat(">>> Reached before d_iqr (overall)\n")
+d_iqr <- svyquantile(~disc, design = dstrat, quantile = c(0.25, 0.5, 0.75), na.rm = TRUE)
 
 
 ################################
-
+cat(">>> Reached before dns_iqr_gender\n")
 dns_iqr_gender <- svyby(~disc_notscaled, by = ~genderid, design = dstrat, 
                       FUN = svyquantile, quantile = c(0.25, 0.5, 0.75), na.rm = TRUE)
 
-
+cat(">>> Reached before dns_iqr_race\n")
 dns_iqr_race <- svyby(~disc_notscaled, by = ~nhwhite2cat, design = dstrat, 
                     FUN = svyquantile, quantile = c(0.25, 0.5, 0.75), na.rm = TRUE)
 
 
-
+cat(">>> Reached before dns_iqr_race_mean\n")
 dns_iqr_race_mean <- svyby(~disc_notscaled, by = ~nhwhite2cat, design = dstrat, 
                          FUN = svymean, na.rm = TRUE)
 
-
+cat(">>> Reached before dns_iqr_gender_mean\n")
 dns_iqr_gender_mean <- svyby(~disc_notscaled, by = ~genderid, design = dstrat, 
                            FUN = svymean, na.rm = TRUE)
 
-
+cat(">>> Reached before dns_mean\n")
 dns_mean<-svymean(~disc_notscaled, design = dstrat,  na.rm=T)
-
+cat(">>> Reached before dns_iqr (overall)\n")
 dns_iqr<-svyquantile(~disc_notscaled, design = dstrat, quantile=c(0.25, 0.5, 0.75), na.rm=T)
 

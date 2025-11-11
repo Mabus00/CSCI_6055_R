@@ -7,7 +7,7 @@ library(dplyr)
 
 library(formattable)
 
-GSS2018 <- read_dta("C:/Users/lhs36/OneDrive - Drexel University/GSS_green_discrimination/2018_stata/GSS2018.dta")
+GSS2018 <- read_dta("C:/Users/wayne/Dal/CSCI_6055_R/gss_green_eds/GSS2018.dta")
 
 #names(GSS2018)
 
