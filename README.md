@@ -33,8 +33,7 @@ The following technical adjustments were made to enable local execution while pr
 
 - **Path corrections:**  
   Original scripts contained hard-coded OneDrive paths referencing Drexel University directories.  
-  These were modified to absolute local paths under:  
-  `C:/Users/wayne/Dal/CSCI_6055_R/gss_green_eds/`.
+  These were modified to absolute local paths.
 
 - **Runtime diagnostics:**  
   Incremental `cat()` statements were inserted throughout the scripts to verify execution order and diagnose early runtime errors in the `svyby()` summary functions.
