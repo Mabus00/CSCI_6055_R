@@ -81,3 +81,19 @@ This repository fulfills the reproducibility requirements of the CSCI 6055 proje
 - **g.** Record all results  
 - **h.** Record explanations of what was done and why  
 
+# Running the CSCI_6055_project.ipynb Notebook
+
+The requirements.txt file specifies the Python packages needed to run the analysis.  
+To create and activate a virtual environment and install the dependencies:
+
+python -m venv venv
+# macOS/Linux:
+source venv/bin/activate
+# Windows:
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+After the environment is active, launch Jupyter Notebook and open
+CSCI_6055_project.ipynb to run the code.
+
